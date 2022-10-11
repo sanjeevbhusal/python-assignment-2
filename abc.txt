@@ -1,0 +1,51 @@
+# based upon the data type of value, run the corresponding function
+if type(value) == str:
+    cls.validate_string(value, validator_dict)
+elif type(value) == int:
+    cls.validate_integer(value, validator_dict)
+elif type(value) == bool:
+    cls.validate_boolean(value, validator_dict)
+
+
+    @classmethod
+    def validate_string(cls, string, validator_dict):
+        for validator in validator_dict:
+            # check if any non-expected validators are supplied in validators_dict
+            if validator not in available_string_validators:
+                raise IncorrectValidator
+
+            if validator == "min_length":
+                assert len(string) >= validator_dict.get("min_length")
+
+            elif validator == "max_length":
+                assert len(string) <= validator_dict.get("max_length")
+
+
+    @classmethod
+    def validate_integer(cls, integer, validator_dict):
+        for validator in validator_dict:
+            # check if any non-expected validators are supplied in validators_dict
+            if validator not in available_integer_validators:
+                raise IncorrectValidator
+
+            if validator == "min_value":
+                assert integer >= validator_dict.get("min_value")
+
+            elif validator == "max_value":
+                assert integer <= validator_dict.get("max_value")
+
+
+    @classmethod
+    def validate_boolean(cls, boolean, validator_dict):
+        for validator in validator_dict:
+            # check if any non-expected validators are supplied in validators_dict
+            if validator not in available_boolean_validators:
+                raise IncorrectValidator
+
+            if validator == "value":
+                assert boolean >= validator_dict.get("value")
+
+
+available_string_validators = ["min_length", "max_length", "data_type"]
+available_integer_validators = ["min_value", "max_value", "data_type"]
+available_boolean_validators = ["value", "data_type"]
