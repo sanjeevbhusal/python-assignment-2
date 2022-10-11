@@ -8,7 +8,7 @@ def get_sentences(word):
     if word in visited_word:
         return visited_word[word]
 
-    # simulating a operation that takes a ong time
+    # simulating a operation that takes a long time
     print("Performing search operation...")
     time.sleep(3)
 
