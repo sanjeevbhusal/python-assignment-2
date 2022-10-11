@@ -60,6 +60,15 @@ def validate_boolean(boolean, validators_dict):
     except IncorrectValidator:
         raise IncorrectValidator
 
+def data_type_from_string(data_type):
+    if data_type == "int":
+        return int
+    elif data_type == "str":
+        return str
+    elif data_type == "boolean":
+        return bool
+
+
 
 def validate(data_dict, validator_dict):
     # make sure all keys present in validator_dict are also present in data_dict
@@ -75,7 +84,7 @@ def validate(data_dict, validator_dict):
 
         try:
             # data type mentioned in validator_dict should match data type supplied in data_dict
-            data_type_required = validators["data_type"]
+            data_type_required = data_type_from_string(validators["data_type"])
             assert type(value) == data_type_required
 
             # based upon the data type supplied in data_dict, run the corresponding function
@@ -97,10 +106,9 @@ data_list = [
     {"id": 0, "name": "Sanjeev", "is_female": True},
 ]
 
-# data = {"id": 1, "name": "Sanjeev", "is_female": False}
-validator = {"id": {"data_type": int, "min_value": 1, "max_value": 10, },
-             "name": {"data_type": str, "min_length": 1, "max_length": 100},
-             "is_female": {"data_type": bool, "value": False}
+validator = {"id": {"data_type": "int", "min_value": 1, "max_value": 10, },
+             "name": {"data_type": "str", "min_length": 1, "max_length": 100},
+             "is_female": {"data_type": "boolean", "value": False}
              }
 
 for data in data_list:
