@@ -91,12 +91,18 @@ def validate(data_dict, validator_dict):
     return True
 
 
-data = {"id": 1, "name": "Sanjeev", "is_female": False}
+data_list = [
+    {"id": 1, "name": "Sanjeev", "is_female": False},
+    {"id": 10, "name": "John", "is_female": False},
+    {"id": 0, "name": "Sanjeev", "is_female": True},
+]
+
+# data = {"id": 1, "name": "Sanjeev", "is_female": False}
 validator = {"id": {"data_type": int, "min_value": 1, "max_value": 10, },
              "name": {"data_type": str, "min_length": 1, "max_length": 100},
              "is_female": {"data_type": bool, "value": False}
              }
 
-
-result = validate(data, validator)
-print(result)
+for data in data_list:
+    result = validate(data, validator)
+    print(result)
